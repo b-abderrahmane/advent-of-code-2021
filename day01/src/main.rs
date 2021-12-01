@@ -25,8 +25,30 @@ fn parse_input_array(text: String) -> Vec<i32> {
     vecs
 }
 
+fn is_greater_than_previous(depths: &mut Vec<i32>, index: usize) -> bool {
+    if index == 0 {
+        return false
+    } else {
+        return depths.get(index) > depths.get(index-1)
+    }
+}
+
+fn count_increased_depths(depths: & mut Vec<i32>) -> i32 {
+    let mut increased_depths = 0;
+    for index in  0..depths.len() {
+    
+        if is_greater_than_previous(depths, index) {
+            increased_depths = increased_depths + 1;
+        }
+    }
+    
+    increased_depths
+}
+
+
 fn main() {
     let content = read_input("input.txt");
-    let input_array = parse_input_array(content);
-    println!("{:?}", input_array);
+    let mut input_array = parse_input_array(content);
+    let increases = count_increased_depths(&mut input_array);
+    println!("{:?}", increases);
 }
