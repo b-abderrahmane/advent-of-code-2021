@@ -17,9 +17,8 @@ fn read_input(file_path: &str)-> String{
     contents
 }
 
-fn evaluate_instruction(mut current_position: Vec<i32>, instruction: &mut Vec<String>) -> Vec<i32>{
+fn evaluate_instruction(mut current_position: Vec<i32>, instruction: &Vec<String>) -> Vec<i32>{
     let mut position = current_position;
-    println!("{:?}", instruction);
     if instruction.len() == 2 {
         match &instruction[0][..] {
             "forward" => {
@@ -52,13 +51,11 @@ fn parse_input_array(text: String) -> Vec<Vec<String>> {
 
 fn main() {
     let content = read_input("input.txt");
-    let mut input_array = parse_input_array(content);
+    let input_array = parse_input_array(content);
     let mut current_position = vec![0, 0];
-    println!("{:?}", input_array);
 
     for index in  0..input_array.len() {
-        current_position = evaluate_instruction(current_position,  &mut input_array[index]);
-        println!("{:?}", current_position);
+        current_position = evaluate_instruction(current_position, &input_array[index]);
     }
     println!("{:?}", current_position[0]*current_position[1]);
 }
