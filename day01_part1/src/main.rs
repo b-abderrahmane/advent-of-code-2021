@@ -3,8 +3,8 @@ use std::io::prelude::*;
 
 
 fn read_input(file_path: &str)-> String{
-    let mut contents = String::new();
-    let mut file = match File::open(file_path) {
+    let mut contents: String = String::new();
+    let mut file: File = match File::open(file_path) {
         Err(why) => panic!("couldn't open the input file: {}", why),
         Ok(file) => file,
     };
@@ -27,9 +27,9 @@ fn parse_input_array(text: String) -> Vec<i32> {
 
 fn is_greater_than_previous(depths: &mut Vec<i32>, index: usize) -> bool {
     if index == 0 {
-        return false
+        false
     } else {
-        return depths.get(index) > depths.get(index-1)
+        depths.get(index) > depths.get(index-1)
     }
 }
 
